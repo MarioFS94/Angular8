@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,7 @@ export class NuevoCorreoComponent implements OnInit {
 
   nuevoCorreo: FormGroup;
   submitted = false;
+  @Input() correo: any;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -19,6 +20,7 @@ export class NuevoCorreoComponent implements OnInit {
       cuerpo: ['', [Validators.required, Validators.minLength(10)]],
       destinatario: ['', [Validators.required, Validators.email]],
     });
+    console.log(this.correo);
   }
 
   get formulario() { return this.nuevoCorreo.controls; }
