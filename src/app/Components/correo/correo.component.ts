@@ -26,7 +26,6 @@ export class CorreoComponent implements OnInit {
 
   private esVisible() {
     let visible = false;
-
     return visible;
   }
 }

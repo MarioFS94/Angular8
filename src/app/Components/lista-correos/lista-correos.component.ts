@@ -9,6 +9,7 @@ export class ListaCorreosComponent implements OnInit {
 
   correos: any[];
   responder: boolean;
+  correoAResponder: any;
 
   constructor() {
     const correo1 = {
@@ -50,13 +51,17 @@ export class ListaCorreosComponent implements OnInit {
     this.correos.push(correo2);
     this.correos.push(correo3);
     this.correos.push(correo4);
+
+    this.responder = false;
   }
 
   ngOnInit() {
   }
 
-  clickResponder() {
-    this.responder = !this.responder;
+  clickResponder(correo) {
+    /* this.responder = !this.responder;
+    this.correoAResponder = correo; */
+    correo.responder = !correo.responder;
   }
-  
+
 }
