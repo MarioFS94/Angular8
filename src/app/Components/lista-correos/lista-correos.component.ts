@@ -64,4 +64,9 @@ export class ListaCorreosComponent implements OnInit {
     correo.responder = !correo.responder;
   }
 
+  accionRespuestaRapida(correo) {
+    console.log("Respuesta Recibida");//este se puede quitar
+    correo.responder = false;
+  }
+
 }
