@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListaCorreosComponent implements OnInit {
 
   correos: any[];
+  responder: boolean;
 
   constructor() {
     const correo1 = {
@@ -27,9 +28,28 @@ export class ListaCorreosComponent implements OnInit {
       destinatario: 'correoReceptor@openWebinar.inv',
       leido: false
     };
+    const correo3 = {
+      titulo: "Titulo del 3",
+      cuerpo: `Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email
+        Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email,
+        Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email`,
+      emisor: 'correoEmisor3@openWebinar.inv',
+      destinatario: 'correoReceptor@openWebinar.inv',
+      leido: true
+    };
+    const correo4 = {
+      titulo: "Titulo del 4",
+      cuerpo: `Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email
+        Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuer`,
+      emisor: 'correoEmisor4@openWebinar.inv',
+      destinatario: 'correoReceptor@openWebinar.inv',
+      leido: false
+    };
     this.correos = [];
     this.correos.push(correo1);
     this.correos.push(correo2);
+    this.correos.push(correo3);
+    this.correos.push(correo4);
   }
 
   ngOnInit() {
