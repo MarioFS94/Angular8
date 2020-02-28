@@ -8,13 +8,16 @@
     <ng-container *ngFor="let correo of correos; index as i;">
         <tr>
             <td>
-                <!--<input type="radio" name="leido-{{i}}" [(ngModel)]="correo.leido" [value]=true disabled> Si
+                <input type="radio" name="leido-{{i}}" [(ngModel)]="correo.leido" [value]=true disabled> Si
                 <input type="radio" name="leido-{{i}}" [(ngModel)]="correo.leido" [value]=false disabled> No 
-            Para cuando cargue los correos de gmail -->
+            <!-- Quitar para cuando cargue los correos de gmail -->
             </td>
             <td>{{correo.emisor}}</td>
             <td>{{correo.titulo}}</td>
-            <td><button (click)="clickResponder(correo)">Responder</button></td>            
+            <td>
+                <button (click)="verDetalle(correo)">Ver</button>
+                <button (click)="clickResponder(correo)">Responder</button>
+            </td>            
         </tr>
         <tr *ngIf="correo.responder" >
             <!--Se puede reemplazar el accionRespuestaRapida($event) por accionRespuestaRapida(correo) gracias al ng-container-->

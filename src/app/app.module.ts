@@ -15,6 +15,12 @@ import {
   NgGapiClientConfig,
   NG_GAPI_CONFIG,
 } from "ng-gapi";
+import { RutasModule } from './rutas.module';
+import { RouterModule } from '@angular/router';
+import { MenuComponent } from './Menu/menu/menu.component';
+import { EnviarComponent } from './Views/enviar/enviar.component';
+import { HomeComponent } from './Views/home/home.component';
+import { VisualizarCorreoComponent } from './Views/visualizar-correo/visualizar-correo.component';
 
 let gapiClientConfig: NgGapiClientConfig = {
   client_id: "258171868610-m8b5v1j96uugtt05f7oadp7q4on088f4.apps.googleusercontent.com",
@@ -38,7 +44,11 @@ let gapiClientConfig: NgGapiClientConfig = {
     NuevoCorreoComponent,
     AvisosComponent,
     CorreosRecibidosComponent,
-    LoginComponent
+    LoginComponent,
+    MenuComponent,
+    EnviarComponent,
+    HomeComponent,
+    VisualizarCorreoComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +58,8 @@ let gapiClientConfig: NgGapiClientConfig = {
     GoogleApiModule.forRoot({
       provide: NG_GAPI_CONFIG,
       useValue: gapiClientConfig
-    })
+    }),
+    RutasModule, RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
