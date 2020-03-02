@@ -24,6 +24,8 @@ import { VisualizarCorreoComponent } from './Views/visualizar-correo/visualizar-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { from } from 'rxjs';
 
+import { MatCardModule } from '@angular/material/card';
+
 let gapiClientConfig: NgGapiClientConfig = {
   client_id: "258171868610-m8b5v1j96uugtt05f7oadp7q4on088f4.apps.googleusercontent.com",
   discoveryDocs: ["https://analyticsreporting.googleapis.com/$discovery/rest?version=v4"],
@@ -63,7 +65,8 @@ let gapiClientConfig: NgGapiClientConfig = {
     }),
     RutasModule, RouterModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
