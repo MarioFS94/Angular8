@@ -30,26 +30,26 @@ export class GmailService {
     params = params.append('format', 'full');
 
     let observableRespuesta = this.http.get(url, { headers:headers, params: params } );
-    
-    return observableRespuesta.pipe(map(
-      (response: any) => {
-        let correo = undefined;
-        if(response) {
-          const emisor = response['payload']['headers'].find(e => e.name === "From");
-          const subject = response['payload']['headers'].find(e => e.name === "Subject");
 
-          correo = {
-            id: response['id'],
-            cuerpo: response['snippet'],
-            emisor: emisor? emisor.value : undefined,
-            titulo: subject? subject.value : undefined,
-          };
-        }
-        return correo;
-      }
-    ));
+    return observableRespuesta.pipe(map(this.helperGetMenssage));
   };
   
+  private helperGetMenssage = (response: any) => {
+    let correo = undefined;
+    if(response) {
+      const emisor = response['payload']['headers'].find(e => e.name === "From");
+      const subject = response['payload']['headers'].find(e => e.name === "Subject");
+
+      correo = {
+        id: response['id'],
+        cuerpo: response['snippet'],
+        emisor: emisor? emisor.value : undefined,
+        titulo: subject? subject.value : undefined,
+      };
+    }
+    return correo;
+  }
+
   public sendMessage = function (text: string, to: string, subject: string){
     const url = "https://www.googleapis.com/gmail/v1/users/"+this.login.userId+"/messages/send";
     const authToken = this.login.tokenUser;
