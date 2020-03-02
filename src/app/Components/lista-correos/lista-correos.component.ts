@@ -1,19 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { GmailService } from 'src/app/Services/gmail.service';
 import { Router } from '@angular/router';
+import { trigger, state, transition, style, animate } from '@angular/animations';
+import { MatTableDataSource } from '@angular/material/table';
+import { AvisosService } from 'src/app/Services/avisos.service';
 
 @Component({
   selector: 'app-lista-correos',
   templateUrl: './lista-correos.component.html',
-  styleUrls: ['./lista-correos.component.css']
+  styleUrls: ['./lista-correos.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ])
+  ]
 })
 export class ListaCorreosComponent implements OnInit {
 
   correos: any[];
-  responder: boolean;
-  correoAResponder: any;
+  columnsToDisplay: string[] = ['Emisor', 'Asunto', 'Acciones'];
+  displayedColumns: string[] = ['emisor', 'titulo', 'id'];
+  dataSource = new MatTableDataSource<any>();
+  expandedElement: any | null;
 
-  constructor(private gmail: GmailService, private router: Router) {
+  responder: boolean;//se puede quitar cuando vaya Gmail
+
+  constructor(private gmail: GmailService, private router: Router, private servicioAvisos: AvisosService) {
     this.correos = [];
     /*Quitar cuando cargue los correos de Gmail */
     const correo1 = {
@@ -39,6 +53,11 @@ export class ListaCorreosComponent implements OnInit {
 
     this.responder = false;
   }
+  
+  ngOnInit() {
+    this.getRecibidos();
+  }
+
   /**
    * Este metodo sirve para navegar a la ruta configurada como mal y enviarle un correo entero como parametro
    * @param correo 
@@ -46,9 +65,7 @@ export class ListaCorreosComponent implements OnInit {
   verDetalle(correo){
     this.router.navigate(['/mail', {correo: JSON.stringify(correo)}]);
   }
-  ngOnInit() {
-    this.getRecibidos();
-  }
+
   getRecibidos() {
     this.gmail.getRecibidos().subscribe(
       (response) => {
@@ -74,25 +91,20 @@ export class ListaCorreosComponent implements OnInit {
           emisor: emisor? emisor.value : undefined,
           titulo: subject? subject.value : undefined,
         };
-        this.correos.push(mensage);
+        this.dataSource.data.push(mensage);
+        this.dataSource._updateChangeSubscription();
       },
       (error) => this.error(error)
     );	    
   }	  
 
   error(error){
-    console.warn("ERROR");
+    this.servicioAvisos.showMenssage("Se ha producido un error", 'Error');
   }
 
-  clickResponder(correo) {
-    /* this.responder = !this.responder;
-    this.correoAResponder = correo; */
-    correo.responder = !correo.responder;
-  }
-
-  accionRespuestaRapida(correo) {
+  accionRespuestaRapida() {
     console.log("Respuesta Recibida");//este se puede quitar
-    correo.responder = false;
+    this.expandedElement = null;
   }
 
 }

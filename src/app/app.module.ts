@@ -27,6 +27,9 @@ import { from } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 let gapiClientConfig: NgGapiClientConfig = {
   client_id: "258171868610-m8b5v1j96uugtt05f7oadp7q4on088f4.apps.googleusercontent.com",
@@ -48,7 +51,7 @@ let gapiClientConfig: NgGapiClientConfig = {
     CorreoComponent,
     ListaCorreosComponent,
     NuevoCorreoComponent,
-    AvisosComponent,
+    //AvisosComponent,
     CorreosRecibidosComponent,
     LoginComponent,
     MenuComponent,
@@ -70,7 +73,10 @@ let gapiClientConfig: NgGapiClientConfig = {
     MatButtonModule,
     MatCardModule,
     MatToolbarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatInputModule,
+    MatTableModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
