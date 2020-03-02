@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { trigger, state, transition, style, animate } from '@angular/animations';
 import { MatTableDataSource } from '@angular/material/table';
 import { AvisosService } from 'src/app/Services/avisos.service';
+import { Correo } from 'src/app/Interfaces/correo';
 
 @Component({
   selector: 'app-lista-correos',
@@ -19,37 +20,38 @@ import { AvisosService } from 'src/app/Services/avisos.service';
 })
 export class ListaCorreosComponent implements OnInit {
 
-  correos: any[];
+  correos: Correo[];
   columnsToDisplay: string[] = ['Emisor', 'Asunto', 'Acciones'];
   displayedColumns: string[] = ['emisor', 'titulo', 'id'];
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<Correo>();
   expandedElement: any | null;
 
   responder: boolean;//se puede quitar cuando vaya Gmail
 
   constructor(private gmail: GmailService, private router: Router, private servicioAvisos: AvisosService) {
     this.correos = [];
-    /*Quitar cuando cargue los correos de Gmail */
-    const correo1 = {
-      titulo: "Titulo del 1",
+    let correo1: Correo, correo2: Correo;
+    /*Quitar cuando cargue los correos de Gmail*/
+    correo1 = {
+      id: "1",
       cuerpo: `Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email
         Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email,
         Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email`,
       emisor: 'correoEmisor1@openWebinar.inv',
-      destinatario: 'correoReceptor@openWebinar.inv',
-      leido: true
+      titulo: "Titulo del 1"/*,
+      leido: true*/
     };
-    const correo2 = {
-      titulo: "Titulo del 2",
+    correo2 = {
+      id: "2",
       cuerpo: `Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email
         Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuerpo del Email, Cuer`,
       emisor: 'correoEmisor2@openWebinar.inv',
-      destinatario: 'correoReceptor@openWebinar.inv',
-      leido: false
+      titulo: "Titulo del 2"/*,
+      leido: false*/
     };
     
     this.correos.push(correo1);
-    this.correos.push(correo2);
+    this.correos.push(correo2); 
 
     this.responder = false;
   }
@@ -66,6 +68,9 @@ export class ListaCorreosComponent implements OnInit {
     this.router.navigate(['/mail', {correo: JSON.stringify(correo)}]);
   }
 
+/**
+ * Aqui recibimos una lista de correos
+ */
   getRecibidos() {
     this.gmail.getRecibidos().subscribe(
       (response) => {
@@ -79,19 +84,14 @@ export class ListaCorreosComponent implements OnInit {
     );
   }
 
+  /**
+   * Sacamos un correo en concreto dde la lista
+   * @param id 
+   */
   getMensaje(id: string){
     this.gmail.getMessage(id).subscribe(
-      (response) => {
-        const emisor = response.payload.headers.find(e => e.name === "From");
-        const subject = response.payload.headers.find(e => e.name === "Subject");
-
-        const mensage = {
-          id: response.id,
-          cuerpo: response.snippet,
-          emisor: emisor? emisor.value : undefined,
-          titulo: subject? subject.value : undefined,
-        };
-        this.dataSource.data.push(mensage);
+      (correoResponse) => {
+        this.dataSource.data.push(correoResponse);
         this.dataSource._updateChangeSubscription();
       },
       (error) => this.error(error)

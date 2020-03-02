@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Correo } from 'src/app/Interfaces/correo';
 
 @Component({
   selector: 'app-correo',
@@ -8,15 +9,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CorreoComponent implements OnInit {
 
-  correo: any;
+  correo: Correo;
   pruebaNgIf: string;
   numbersWords = ['uno', 'dos', 'tres'];
 
   constructor(private route: ActivatedRoute) {
     this.correo = {
+      id: "",
       titulo: "",
       cuerpo: "",
-      emisor: ""
+      emisor: ""/*,
+      leido: false*/
     };
     this.pruebaNgIf= "Es visible si esVisible es true, ya que *ngIf solo evalua booleanos";
   }

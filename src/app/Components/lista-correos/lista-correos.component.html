@@ -4,8 +4,8 @@
 
     <ng-container *ngIf="i<2">
         <!-- Quitar para cuando cargue los correos de gmail -->
-        <input type="radio" name="leido-{{i}}" [(ngModel)]="correo.leido" [value]=true disabled> Si
-        <input type="radio" name="leido-{{i}}" [(ngModel)]="correo.leido" [value]=false disabled> No 
+        <input type="radio" name="leido-{{i}}" [value]=true disabled> Si<!--[(ngModel)]="correo.leido" -->
+        <input type="radio" name="leido-{{i}}" [value]=false disabled> No <!--[(ngModel)]="correo.leido" -->
         <!-- Quitar para cuando cargue los correos de gmail -->
       <td mat-cell *matCellDef="let element"> {{element[displayedColumns[i]]}} </td>
     </ng-container>
