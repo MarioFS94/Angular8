@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-correo',
   templateUrl: './correo.component.html',
-  styleUrls: ['./correo.component.css']
+  styleUrls: ['./correo.component.scss']
 })
 export class CorreoComponent implements OnInit {
 

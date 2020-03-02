@@ -8,7 +8,7 @@ import { AvisosService } from 'src/app/Services/avisos.service';
 @Component({
   selector: 'app-lista-correos',
   templateUrl: './lista-correos.component.html',
-  styleUrls: ['./lista-correos.component.css'],
+  styleUrls: ['./lista-correos.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),

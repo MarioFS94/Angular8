@@ -6,7 +6,7 @@ import { GmailService } from 'src/app/Services/gmail.service';
 @Component({
   selector: 'app-nuevo-correo',
   templateUrl: './nuevo-correo.component.html',
-  styleUrls: ['./nuevo-correo.component.css']
+  styleUrls: ['./nuevo-correo.component.scss']
 })
 export class NuevoCorreoComponent implements OnInit {
 
