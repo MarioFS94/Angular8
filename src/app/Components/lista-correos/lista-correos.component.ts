@@ -39,6 +39,10 @@ export class ListaCorreosComponent implements OnInit {
 
     this.responder = false;
   }
+  /**
+   * Este metodo sirve para navegar a la ruta configurada como mal y enviarle un correo entero como parametro
+   * @param correo 
+   */
   verDetalle(correo){
     this.router.navigate(['/mail', {correo: JSON.stringify(correo)}]);
   }
