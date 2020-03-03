@@ -3,6 +3,7 @@ import * as _ from "lodash";
 import { GoogleAuthService } from 'ng-gapi/lib/GoogleAuthService';
 import GoogleUser = gapi.auth2.GoogleUser;
 import { debug } from 'util';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,9 @@ export class LoginService {
   }
   
   private setUser(user: any){
-    this.profile = user['w3'];
-    this.tokenUser = user['Zi'].access_token;
-    this.userId = this.profile['Eea'];
+    this.profile = user['Rt'];
+    this.tokenUser = user['uc'].access_token;
+    this.userId = this.profile['eV'];
   }	  
 
   private getSessionUser(): GoogleUser {
