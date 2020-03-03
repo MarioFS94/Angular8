@@ -74,4 +74,4 @@ export class LoginService {
   private signInErrorHandler(err) {
     console.warn(err);
   }
-}  
+}
