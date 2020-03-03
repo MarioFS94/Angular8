@@ -5,6 +5,7 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 import { MatTableDataSource } from '@angular/material/table';
 import { AvisosService } from 'src/app/Services/avisos.service';
 import { Correo } from 'src/app/Interfaces/correo';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-lista-correos',
@@ -28,8 +29,14 @@ export class ListaCorreosComponent implements OnInit {
 
   responder: boolean;//se puede quitar cuando vaya Gmail
 
+  // Subscripciones
+  recibidosSubscription: Subscription;
+  mensajesSubscription: Subscription[];
+ 
   constructor(private gmail: GmailService, private router: Router, private servicioAvisos: AvisosService) {
     this.correos = [];
+    this.mensajesSubscription = [];
+
     let correo1: Correo, correo2: Correo;
     /*Quitar cuando cargue los correos de Gmail*/
     correo1 = {
@@ -73,9 +80,10 @@ export class ListaCorreosComponent implements OnInit {
  * Aqui recibimos una lista de correos
  */
   getRecibidos() {
-    this.gmail.getRecibidos().subscribe(
+    this.recibidosSubscription = this.gmail.getRecibidos().subscribe(
       (response) => {
-        const mensajes = response.messages;
+        const mensajes = response['messages'];
+
         console.log("LISTA RECIBIDOS:", mensajes);
         mensajes.forEach(element => {
           this.getMensaje(element.id);
@@ -90,13 +98,13 @@ export class ListaCorreosComponent implements OnInit {
    * @param id 
    */
   getMensaje(id: string){
-    this.gmail.getMessage(id).subscribe(
+    this.mensajesSubscription.push(this.gmail.getMessage(id).subscribe(
       (correoResponse) => {
         this.dataSource.data.push(correoResponse);
         this.dataSource._updateChangeSubscription();
       },
       (error) => this.error(error)
-    );	    
+    ));	    
   }	  
 
   error(error){
@@ -108,4 +116,14 @@ export class ListaCorreosComponent implements OnInit {
     this.expandedElement = null;
   }
 
+  ngOnDestroy(){
+    if(!this.recibidosSubscription.closed){
+      this.recibidosSubscription.unsubscribe();
+    }
+    this.mensajesSubscription.forEach(element => {
+      if(!element.closed){
+        element.unsubscribe();
+      }
+    });
+  }
 }
