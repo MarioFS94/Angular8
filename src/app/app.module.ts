@@ -24,13 +24,7 @@ import { VisualizarCorreoComponent } from './Views/visualizar-correo/visualizar-
 import { CorreosRecibidosComponent } from './Views/correos-recibidos/correos-recibidos.component';
 
 //Material Libs
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MaterialLibsModule } from './Modules/material-libs/material-libs.module';
 
 // External Libs
 import {
@@ -78,13 +72,7 @@ let gapiClientConfig: NgGapiClientConfig = {
     }),
     RutasModule, RouterModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatDividerModule,
-    MatInputModule,
-    MatTableModule,
-    MatSnackBarModule
+    MaterialLibsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
