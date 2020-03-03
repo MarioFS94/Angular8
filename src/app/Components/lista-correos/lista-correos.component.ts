@@ -69,6 +69,7 @@ export class ListaCorreosComponent implements OnInit {
   }
 
 /**
+ * Aqui hacemos llamadas para recoger los emails
  * Aqui recibimos una lista de correos
  */
   getRecibidos() {

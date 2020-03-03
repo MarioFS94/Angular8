@@ -1,35 +1,43 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
+
+// Main files
 import { AppComponent } from './app.component';
+import { RutasModule } from './rutas.module';
+import { RouterModule } from '@angular/router';
+
+// Components
 import { CorreoComponent } from './Components/correo/correo.component';
 import { ListaCorreosComponent } from './Components/lista-correos/lista-correos.component';
 import { NuevoCorreoComponent } from './Components/nuevo-correo/nuevo-correo.component';
-import { AvisosComponent } from './Components/avisos/avisos.component';
-import { CorreosRecibidosComponent } from './Views/correos-recibidos/correos-recibidos.component';
+//import { AvisosComponent } from './Components/avisos/avisos.component';
 import { LoginComponent } from './Components/login/login.component';
-import { HttpClientModule } from '@angular/common/http';
-import {
-  GoogleApiModule,
-  NgGapiClientConfig,
-  NG_GAPI_CONFIG,
-} from "ng-gapi";
-import { RutasModule } from './rutas.module';
-import { RouterModule } from '@angular/router';
+
+// View and Menu
 import { MenuComponent } from './Menu/menu/menu.component';
 import { EnviarComponent } from './Views/enviar/enviar.component';
 import { HomeComponent } from './Views/home/home.component';
 import { VisualizarCorreoComponent } from './Views/visualizar-correo/visualizar-correo.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { from } from 'rxjs';
+import { CorreosRecibidosComponent } from './Views/correos-recibidos/correos-recibidos.component';
 
+//Material Libs
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+// External Libs
+import {
+  GoogleApiModule,
+  NgGapiClientConfig,
+  NG_GAPI_CONFIG,
+} from "ng-gapi";
 
 let gapiClientConfig: NgGapiClientConfig = {
   client_id: "258171868610-m8b5v1j96uugtt05f7oadp7q4on088f4.apps.googleusercontent.com",
