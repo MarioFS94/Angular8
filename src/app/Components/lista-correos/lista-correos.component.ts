@@ -112,7 +112,7 @@ export class ListaCorreosComponent implements OnInit {
   }
 
   accionRespuestaRapida() {
-    console.log("Respuesta Recibida");//este se puede quitar
+    console.log("Respuesta Recibida");
     this.expandedElement = null;
   }
 
